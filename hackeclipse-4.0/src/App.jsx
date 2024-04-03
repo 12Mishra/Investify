@@ -4,7 +4,7 @@ import Signup from "./Components/Signup";
 import Home from "./Components/Home";
 import About from "./Components/About";
 import Carousal from "./Components/Carousal";
-import Data from "./Components/Data";
+import Profile from "./Components/Profile";
 import {
   BrowserRouter as Main,
   Route,
@@ -26,6 +26,7 @@ function App() {
           {<Route exact path='/about' element={<About />} />}
           {<Route exact path='/login' element={<Login />} />}
           {<Route exact path='/signup' element={<Signup />} />}
+          {<Route exact path='/profile' element={<Profile />} />}
         </Routes>
 
         <div><Footer /></div>
