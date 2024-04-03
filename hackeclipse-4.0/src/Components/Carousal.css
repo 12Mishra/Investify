@@ -1,0 +1,13 @@
+.carousel-item {
+    transition: opacity 0.6s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.carousel-fade .carousel-item.active {
+    opacity: 1;
+}
