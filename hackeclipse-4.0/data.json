@@ -1,0 +1,13 @@
+[
+    {
+        "user_id": "660d06587a5d12e94661a55d",
+        "name": "Naman",
+        "email": "naman@gmail.com",
+        "phone": "892962",
+        "password": "$2b$10$HSOApinKRgSrDiso6jkmkOsRC/mY.FKi3PKV45WYlGq2tltHt6o.m",
+        "stocks": [],
+        "createdAt": "2024-04-03T07:33:44.308Z",
+        "updatedAt": "2024-04-03T07:33:44.308Z",
+        "__v": 0
+    }
+]

@@ -5,6 +5,7 @@ import Home from "./Components/Home";
 import About from "./Components/About";
 import Carousal from "./Components/Carousal";
 import Profile from "./Components/Profile";
+
 import {
   BrowserRouter as Main,
   Route,
@@ -24,8 +25,8 @@ function App() {
         <Routes>
           <Route exact path='/' element={<><Home /></>} />
           {<Route exact path='/about' element={<About />} />}
-          {<Route exact path='/login' element={<Login />} />}
-          {<Route exact path='/signup' element={<Signup />} />}
+          {<Route exact path='/auth/login' element={<Login />} />}
+          {<Route exact path='/auth/register' element={<Signup />} />}
           {<Route exact path='/profile' element={<Profile />} />}
         </Routes>
 
