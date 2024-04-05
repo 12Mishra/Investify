@@ -8,7 +8,7 @@ const Footer = () => {
     if (location.pathname === '/') {
         return (
             <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <p className="col-md-4 mb-0 text-body-secondary">© 2024 Company, Investify</p>
+                <p className="col-md-4 mb-0 text-body-secondary">© 2024 Company, Investo</p>
 
                 <a href="/" className="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <svg className="bi me-2" width="40" height="32"><use xlinkHref="#bootstrap"></use></svg>
@@ -23,7 +23,6 @@ const Footer = () => {
             </footer>
         );
     } else {
-        // Render nothing if not on the home page
         return null;
     }
 };

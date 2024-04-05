@@ -39,14 +39,10 @@ const Login = () => {
             }
         }
     };
-
-    const handleLogout = () => {
-        Cookies.remove('token'); // Delete the 'token' cookie
-        navigate("/login"); // Redirect to login page after logout
-    };
-
-    return (
-        <div>
+       
+        return (
+            <div>
+            
             <div className="container">
                 <form onSubmit={handleSubmit} className="form">
                     <h2>Login</h2>
@@ -88,7 +84,7 @@ const Login = () => {
                     </div>
                     {error && <div className="error-message">{error}</div>}
                 </form>
-                <button onClick={handleLogout}>Logout</button> {/* Logout button */}
+                {/* <button onClick={handleLogout}>Logout</button> Logout button */}
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import stock5 from '../Assets/stock 5.png';
+import stock3 from '../Assets/stock3.jpg';
 
 import './Carousal.css'
 const Carousel = () => {
@@ -12,13 +12,13 @@ const Carousel = () => {
             <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img src={stock5} className="d-block w-100" style={{ height: '700px' }} alt="..." />
+                        <img src={stock3} className="d-block w-100" style={{ height: '600px' }} alt="..." />
                     </div>
                     <div className="carousel-item">
-                        <img src={stock5} className="d-block w-100" style={{ height: '700px' }} alt="..." />
+                        <img src={stock3} className="d-block w-100" style={{ height: '600px' }} alt="..." />
                     </div>
                     <div className="carousel-item">
-                        <img src={stock5} className="d-block w-100" style={{ height: '700px' }} alt="..." />
+                        <img src={stock3} className="d-block w-100" style={{ height: '600px' }} alt="..." />
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
