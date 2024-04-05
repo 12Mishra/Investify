@@ -1,71 +1,97 @@
-import React from 'react'
-import './Login.css'
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 const Login = () => {
-    function togglePasswordVisibility() {
-        const passwordInput = document.getElementById('password');
-        const toggleButton = document.querySelector('.toggle-password');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            toggleButton.textContent = 'Hide';
-        } else {
-            passwordInput.type = 'password';
-            toggleButton.textContent = 'Show';
+    useEffect(() => {
+        const token = Cookies.get('token');
+        if (token) {
+            navigate("/profile");
         }
-    }
+    }, []);
 
-    function validateForm(event) {
-        const emailInput = document.getElementById('email');
-        const emailError = document.getElementById('emailError');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        if (!emailRegex.test(emailInput.value)) {
-            emailError.textContent = 'Invalid email format';
-            event.preventDefault(); // Prevent form submission
-        } else {
-            emailError.textContent = ''; // Clear error message
+        try {
+            const response = await Axios.post("http://localhost:3001/auth/login", {
+                email,
+                password
+            });
+
+            if (response.status === 200) {
+                Cookies.set('token', response.data.token);
+                navigate("/user");
+            } else {
+                setError("An error occurred. Please try again.");
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.msg) {
+                setError(error.response.data.msg);
+            } else {
+                setError("An error occurred. Please try again.");
+            }
         }
-    }
+    };
+
+    const handleLogout = () => {
+        Cookies.remove('token'); // Delete the 'token' cookie
+        navigate("/login"); // Redirect to login page after logout
+    };
+
     return (
         <div>
-            <div>
-                <div className="container">
-                    <form action="#" className="form">
-                        <h2>Login</h2>
-                        <div className="field email-field">
-                            <div className="input-field">
-                                <input type="email" placeholder="Email" className="email" />
-                            </div>
-                            <span className="error email-error">
-                                <i className="bx bx-error-circle error-icon"></i>
-                                <p className="error-text">Please enter a valid email</p>
-                            </span>
+            <div className="container">
+                <form onSubmit={handleSubmit} className="form">
+                    <h2>Login</h2>
+                    <div className="field email-field">
+                        <div className="input-field">
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                className="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
                         </div>
-                        <div className="field create-password">
-                            <div className="input-field">
-                                <input
-                                    type="password"
-                                    placeholder="Password"
-                                    className="password"
-                                />
-                                <i className="bx bx-hide show-hide"></i>
-                            </div>
-                            <span className="error password-error">
-                                <i className="bx bx-error-circle error-icon"></i>
-                                <p className="error-text">
-                                    Please enter atleast 8 charatcer with number, symbol, small and
-                                    capital letter.
-                                </p>
-                            </span>
+                        <span className="error email-error">
+                            <i className="bx bx-error-circle error-icon"></i>
+                            <p className="error-text">Please enter a valid email</p>
+                        </span>
+                    </div>
+                    <div className="field create-password">
+                        <div className="input-field">
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                className="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <i className="bx bx-hide show-hide"></i>
                         </div>
-                        <div className="input-field button">
-                            <input type="submit" value="Login" className="submit-btn" />
-                        </div>
-                    </form>
-                </div>
+                        <span className="error password-error">
+                            <i className="bx bx-error-circle error-icon"></i>
+                            <p className="error-text">
+                                Please enter at least 8 characters with a combination of numbers, symbols, lowercase, and uppercase letters.
+                            </p>
+                        </span>
+                    </div>
+                    <div className="input-field button">
+                        <input type="submit" value="Login" className="submit-btn" />
+                    </div>
+                    {error && <div className="error-message">{error}</div>}
+                </form>
+                <button onClick={handleLogout}>Logout</button> {/* Logout button */}
             </div>
         </div>
-    )
+    );
 }
 
-export default Login
+export default Login;

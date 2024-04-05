@@ -4,6 +4,7 @@ import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill }
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line }
     from 'recharts';
 import './Profile.css'
+import records from './data.json';
 function Profile() {
 
     const data = [
@@ -52,6 +53,7 @@ function Profile() {
     ];
 
 
+
     return (
         <main className='main-container'>
             <div className='main-title'>
@@ -61,7 +63,7 @@ function Profile() {
             <div className='main-cards'>
                 <div className='card'>
                     <div className='card-inner'>
-                        <h3>PRODUCTS</h3>
+                        <h3>Number of Stocks</h3>
                         <BsFillArchiveFill className='card_icon' />
                     </div>
                     <h1>300</h1>
@@ -134,6 +136,25 @@ function Profile() {
                     </LineChart>
                 </ResponsiveContainer>
 
+            </div>
+
+
+
+
+            <div>
+                <h3><center>Profile User</center></h3>
+                {
+                    records.map(record => {
+                        return (
+                            <>
+                            <div className='box'>Name: { record.name}</div>
+                            <div className='box'>Email: { record.email}</div>
+                            <div className='box'>Phone: { record.phone}</div>
+                            </>
+                            
+                        )
+                    })
+                }
             </div>
         </main>
     )

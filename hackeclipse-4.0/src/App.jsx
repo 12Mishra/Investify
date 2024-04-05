@@ -5,7 +5,7 @@ import Home from "./Components/Home";
 import About from "./Components/About";
 import Carousal from "./Components/Carousal";
 import Profile from "./Components/Profile";
-
+import './App.css'
 import {
   BrowserRouter as Main,
   Route,
@@ -27,7 +27,8 @@ function App() {
           {<Route exact path='/about' element={<About />} />}
           {<Route exact path='/auth/login' element={<Login />} />}
           {<Route exact path='/auth/register' element={<Signup />} />}
-          {<Route exact path='/profile' element={<Profile />} />}
+          {<Route exact path='/user' element={<Profile />} />}
+
         </Routes>
 
         <div><Footer /></div>
