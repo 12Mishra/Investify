@@ -1,0 +1,2 @@
+userData is the state variable that holds the current state value.
+setUserData is the function that you can call to update the userData state.
