@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
-import logo21 from '../Assets/logo23.jpg';
+import logo21 from '../Assets/logo24.jpg';
 import './Navbar.css';
 import Cookies from 'js-cookie';
+import './Navbar.css'
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -13,9 +14,42 @@ const Navbar = () => {
         Cookies.remove('token');
         navigate("/");
     }
-    const [userData, setUserData] = useState();
+    
+    
+    const [userData, setUserData] = useState("");
+    
+    useEffect(() => {
 
-   
+        const fetchData = async () => {
+            try {
+                const token = Cookies.get('token');
+
+                // Get the token from cookies
+                const request = await Axios.get('http://localhost:3001/user/', {
+                    headers: {
+                        Authorization: `Bearer ${token}` // Include the token in the Authorization header
+                    },
+                    // withCredentials: true
+                });
+
+                
+
+                setUserData(request.data);
+            } catch (error) {
+                console.error('Error fetching user details:', error.message);
+            }
+
+            // if (request.status === 500) {
+            //     Navigate("/auth/login/");
+            // }
+            // console.log(request.status);
+        };
+
+
+        // console.log({ userData });
+
+        fetchData();
+    }, []);
 
     return (
         <div>
@@ -32,12 +66,13 @@ const Navbar = () => {
                             {auth && (
                                 <>
                                     <li className="nav-item">
-                                        <Link className="nav-link active mx-2" to="/buynow">BUY STOCKS</Link>
+                                        <Link className="nav-link active mx-2" to="/buynow">INVEST </Link>
                                     </li>
+                                    
                                     <li className="nav-item">
                                         <div className="dropdown">
                                             <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
-                                                Hello,
+                                                Hello, {userData.name}
                                             </button>
                                             <ul className="dropdown-menu">
                                                 <li className="nav-item">

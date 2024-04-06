@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-
+import './Login.css'
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -39,10 +39,10 @@ const Login = () => {
             }
         }
     };
-       
-        return (
-            <div>
-            
+
+    return (
+        <div>
+
             <div className="container">
                 <form onSubmit={handleSubmit} className="form">
                     <h2>Login</h2>

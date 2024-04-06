@@ -18,6 +18,10 @@ h3 {
 
 }
 
+h4 {
+    color: black;
+}
+
 .center-button {
     display: block;
     margin: auto;
@@ -26,4 +30,5 @@ h3 {
 body {
     font-size: larger;
     color: black;
+    background-color: white;
 }

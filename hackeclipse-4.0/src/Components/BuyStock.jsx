@@ -2,10 +2,11 @@ import React from 'react'
 import './BuyStock.css'
 import Axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const BuyStock = () => {
-    
-    
+
+
     const investorData = [
         // {
         //     "id": 1,
@@ -80,8 +81,14 @@ const BuyStock = () => {
             "description": "Radhakishan Shivkishan Damani is an Indian billionaire businessman and investor, He is the founder and chairman of retail chain Avenue Supermarts Limited. Damani is often referred to as the Retail King of India.",
 
         },
+        {
+            "id": 2,
+            "name": "Premji",
+            "description": "Radhakishan Shivkishan Damani is an Indian billionaire businessman and investor, He is the founder and chairman of retail chain Avenue Supermarts Limited. Damani is often referred to as the Retail King of India.",
+        },
 
-     ]
+
+    ]
 
 
     // const [userData, setUserData] = useState("");
@@ -100,7 +107,12 @@ const BuyStock = () => {
     // }, []);
 
 
+    const [users, setUsers] = useState([]);
 
+    useEffect(() => {
+
+        setUsers(investorData)
+    }, [])
 
     return (
         // <div>
@@ -220,6 +232,14 @@ const BuyStock = () => {
                                 <h5>{investor.name}</h5>
                             </div>
                             <p>Investment: {investor.description}</p>
+                            <div class="mb-3">
+                                <div className="form-check">
+                                    <input type="checkbox" className="form-check-input" id="dropdownCheck" />
+                                    <label className="form-check-label" for="dropdownCheck">
+                                        Remember
+                                    </label>
+                                </div>
+                            </div>
                             {/* <p>Stocks Available:
                                 <table className="table table-striped">
                                     <thead>
@@ -248,12 +268,17 @@ const BuyStock = () => {
                                 </div> */}
 
                             <div>
-                                
+
                             </div>
                         </div>
                     </div>
 
                 ))}
+                <nav class="navbar fixed-bottom bg-body-tertiary">
+                    <div class="container-fluid">
+                        <button><Link className="navbar-brand" to="/buystockss">See Stocks</Link></button>
+                    </div>
+                </nav>
             </div>
 
         </>

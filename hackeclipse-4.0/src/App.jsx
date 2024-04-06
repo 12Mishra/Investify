@@ -12,7 +12,9 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import BuyStockss from "./Components/BuyStockss";
 import Footer from "./Components/Footer";
+
 function App() {
 
 
@@ -31,7 +33,7 @@ function App() {
           {<Route exact path='/auth/register' element={<Signup />} />}
           {<Route exact path='/user' element={<Profile />} />}
           {<Route exact path='/buynow' element={<BuyStock />} />}
-
+          {<Route exact path='/buystockss' element={<BuyStockss />} />}
         </Routes>
 
         <div><Footer /></div>
