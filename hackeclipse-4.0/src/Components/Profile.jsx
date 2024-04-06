@@ -7,13 +7,16 @@ import './Profile.css'
 import Axios from 'axios';
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 
 
-const Profile = (props) => {
+const Profile = () => {
 
+    const token=Cookies.get('token')
 
-
-    <h1>{props.cToken}</h1>
+    if(!token){
+        Navigate('/auth/login');
+    }
 
 
     const data = [
@@ -38,21 +41,32 @@ const Profile = (props) => {
     useEffect(() => {
 
         const fetchData = async () => {
-            const token = cToken || Cookies.get('token');
             try {
-                const request = await Axios.get('http://localhost:3001/user/',
-                    {
-                        withCredentials: true
-                    });
+                const token = Cookies.get('token');
+
+                // Get the token from cookies
+                const request = await Axios.get('http://localhost:3001/user/', {
+                    headers: {
+                        Authorization: `Bearer ${token}` // Include the token in the Authorization header
+                    },
+                    // withCredentials: true
+                });
+
+                
 
                 setUserData(request.data);
-
             } catch (error) {
                 console.error('Error fetching user details:', error.message);
             }
+
+            // if (request.status === 500) {
+            //     Navigate("/auth/login/");
+            // }
+            // console.log(request.status);
         };
 
-        console.log({ userData });
+
+        // console.log({ userData });
 
         fetchData();
     }, []);
@@ -145,7 +159,9 @@ const Profile = (props) => {
 
             <div>
                 <h3><center><u>Profile Data</u></center></h3>
-                <p>{userData.email}</p>
+                <p><h3>Name: {userData.name}</h3></p>
+                <p><h3>Email: {userData.email}</h3></p>
+                <p><h3>Phone: {userData.phone}</h3></p>
             </div>
 
 

@@ -1,4 +1,29 @@
+h1 {
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h5 {
+    color: black;
+}
+
+p {
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h3 {
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
 .center-button {
     display: block;
     margin: auto;
+}
+
+body {
+    font-size: larger;
+    color: black;
 }
