@@ -7,8 +7,7 @@ import './Profile.css'
 import Axios from 'axios';
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
-
+import { Link, Navigate } from 'react-router-dom';
 
 const Profile = () => {
 
@@ -36,10 +35,22 @@ const Profile = () => {
     // ];
     const data=[
         {
-            "invested-amt":"10000",
-            
+            "investment":9090,
+            "current":15000,
+
         }
     ]
+
+    const holding=[
+        {   
+            "companyname": "Apple Computer, Inc",
+            "ltp":1000,
+            "yearlychange": 300,
+            "monthlychange":500,
+        }
+    ]
+
+    let variable= data[0].current-data[0].investment;
 
     const [userData, setUserData] = useState("");
 
@@ -177,12 +188,37 @@ const Profile = () => {
 
 
         <>
-        <h1><center>YOUR PORTFOLIO</center></h1>
-        <div>
-            <p><h3>Invested Amount: </h3></p>
-            <p><h3>Current Value: </h3></p>
-            <p><h3>Net Profit&Loss: </h3></p>
-        </div>
+        <h1><center><u>YOUR PORTFOLIO</u></center></h1>
+        <p><h3>Invested Amount: ₹ {data[0].investment}/-</h3></p>
+        <p><h3>Current Value: ₹ {data[0].current}/-</h3></p>
+         <p><h3>Net Profit & Loss: ₹ {variable}/-</h3></p> 
+
+         {/* <button><Link to='/holding'>See your holding</Link></button> */}
+
+         <h1><center><u>YOUR CURRENT HOLDINGS</u></center></h1>
+         <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Last Traded Price</th>
+                        <th>Yearly Change </th>
+                        <th>Monthly Change</th>
+                    </tr>
+                </thead>
+                 {/* <tbody>
+                    {holding.map((investor, i) => (
+                        investor.stocks.map((stock, j) => (
+                            <tr key={`${i}-${j}`}>
+                                <td>{stock.symbol}</td>
+                                <td>{stock.quantity}</td>
+                                <td>{stock.buyPrice}</td>
+                                <td>{stock.investedamt}</td>
+                            </tr>
+                        ))
+                    ))}
+                </tbody> */}
+            </table>
+        
         </>
         
     )
