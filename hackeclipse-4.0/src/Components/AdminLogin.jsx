@@ -14,17 +14,9 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await Axios.post("http://localhost:3001/auth/login", {
-                email,
-                password
-            });
-
-            if (response.status === 200) {
-                Cookies.set('token', response.data.token);
-                navigate("/user");
-            } else {
-                setError("An error occurred. Please try again.");
-            }
+            if(password==="investify@admin" && email==="admin@investify.com"){
+                navigate("/admin/dashboard");
+            }            
         } catch (error) {
             if (error.response && error.response.data && error.response.data.msg) {
                 setError(error.response.data.msg);
@@ -41,7 +33,7 @@ const Login = () => {
                 <div className="shape"></div>
             </div>
             <form onSubmit={handleSubmit} className="login-form">
-                <h3>Login Here</h3>
+                <h3>Admin Login Here</h3>
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 

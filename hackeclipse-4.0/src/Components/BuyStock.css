@@ -1,11 +1,9 @@
 * {
     padding: 0;
-    margin: 20;
+    margin: 0;
     box-sizing: border-box;
 }
-.text{
-    margin-bottom: 0px;
-}
+
 body {
     background-color: #f3f3f3;
     font-family: 'Poppins', sans-serif;
@@ -19,7 +17,7 @@ body {
 }
 
 .heading {
-    background-color: #cb202d;
+    background-color: #ffffff;
     color: #ffffff;
     margin-bottom: 30px;
     padding: 120px 0 30px 0;
@@ -60,6 +58,7 @@ body {
     display: grid;
     grid-template-rows: auto 1fr 50px;
     grid-row-gap: 15px;
+    color: black;
 }
 
 .details-sub {

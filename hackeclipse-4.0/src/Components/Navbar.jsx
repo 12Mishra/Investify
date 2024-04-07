@@ -95,6 +95,9 @@ const Navbar = () => {
                                             <Link className="btn btn mx-2" to="/auth/login" role="button">Login</Link>
                                         </button>
                                         <button className="btn btn-outline-success me-2" type="button">
+                                            <Link className="btn btn mx-2" to="/admin/login" role="button">Admin Login</Link>
+                                        </button>
+                                        <button className="btn btn-outline-success me-2" type="button">
                                             <Link className="btn btn mx-2" to="/auth/register" role="button">Register</Link>
                                         </button>
                                     </form>

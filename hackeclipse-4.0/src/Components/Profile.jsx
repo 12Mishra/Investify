@@ -1,227 +1,83 @@
-import React from 'react'
-import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill }
-    from 'react-icons/bs'
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line }
-    from 'recharts';
-import './Profile.css'
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
-import { useState, useEffect } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+
 
 const Profile = () => {
-
-    const token=Cookies.get('token')
-
-    if(!token){
-        Navigate('/auth/login');
-    }
-
-
-    // const data = [
-    //     {
-    //         name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
-    //     },
-    //     {
-    //         name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
-    //     },
-    //     {
-    //         name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
-    //     },
-    //     {
-    //         name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
-    //     },
-
-    // ];
-    const data=[
-        {
-            "investment":9090,
-            "current":15000,
-
-        }
-    ]
-
-    const holding=[
-        {   
-            "companyname": "Apple Computer, Inc",
-            "ltp":1000,
-            "yearlychange": 300,
-            "monthlychange":500,
-        }
-    ]
-
-    let variable= data[0].current-data[0].investment;
-
-    const [userData, setUserData] = useState("");
-
+    const token = Cookies.get('token');
+    const [holding, setHolding] = useState({});
+    const [totalAmountInvested, setTotalAmountInvested] = useState(0);
+    const [totalCurrentValue, setTotalCurrentValue] = useState(0);
 
     useEffect(() => {
 
+
         const fetchData = async () => {
             try {
-                const token = Cookies.get('token');
-
-                // Get the token from cookies
-                const request = await Axios.get('http://localhost:3001/user/', {
+                const response = await Axios.get('http://localhost:3001/user/', {
                     headers: {
-                        Authorization: `Bearer ${token}` // Include the token in the Authorization header
+                        Authorization: `Bearer ${token}`
                     },
-                    // withCredentials: true
                 });
 
-                
+                setHolding(response.data);
 
-                setUserData(request.data);
+                // Calculate total invested amount and current value
+                let investedAmount = 0;
+                let currentValue = 0;
+
+                response.data.stocks.forEach(stock => {
+                    investedAmount += stock.quantity * stock.buyPrice;
+                    // Assuming current value is not available in the response data
+                    // currentValue += stock.current; // Uncomment this line if current value is available
+                });
+
+                setTotalAmountInvested(investedAmount);
+                setTotalCurrentValue(currentValue);
             } catch (error) {
                 console.error('Error fetching user details:', error.message);
             }
-
-            // if (request.status === 500) {
-            //     Navigate("/auth/login/");
-            // }
-            // console.log(request.status);
         };
 
-
-        // console.log({ userData });
-
         fetchData();
-    }, []);
+    }, [token]);
 
-
-
+    const variable = Math.round((holding.currentAmount - holding.investedAmount));
+    console.log(holding.currentValue)
     return (
-        
-        // <main className='main-container'>
-        //     <div className='main-title'>
-        //         <h3>DASHBOARD</h3>
-        //     </div>
+        <div className="profile-container">
+            <h1 className="profile-title"><center>YOUR PORTFOLIO</center></h1>
+            <div className="portfolio-details">
+                <p className="investment">Invested Amount: ₹ {holding.investedAmount}/-</p>
+                {/* Uncomment the line below if current value is available */}
+                <p className="current-value">Current Value: ₹ {holding.currentAmount}/-</p>
+                <p className="net-profit-loss">Net Profit & Loss: ₹ {variable}/-</p>
+            </div>
 
-        //     <div className='main-cards'>
-        //         <div className='card'>
-        //             <div className='card-inner'>
-        //                 <h3>Number of Stocks</h3>
-        //                 <BsFillArchiveFill className='card_icon' />
-        //             </div>
-        //             <h1>300</h1>
-        //         </div>
-        //         <div className='card'>
-        //             <div className='card-inner'>
-        //                 <h3>CATEGORIES</h3>
-        //                 <BsFillGrid3X3GapFill className='card_icon' />
-        //             </div>
-        //             <h1>12</h1>
-        //         </div>
-        //         <div className='card'>
-        //             <div className='card-inner'>
-        //                 <h3>CUSTOMERS</h3>
-        //                 <BsPeopleFill className='card_icon' />
-        //             </div>
-        //             <h1>33</h1>
-        //         </div>
-        //         <div className='card'>
-        //             <div className='card-inner'>
-        //                 <h3>ALERTS</h3>
-        //                 <BsFillBellFill className='card_icon' />
-        //             </div>
-        //             <h1>42</h1>
-        //         </div>
-        //     </div>
-
-        //     <div className='charts'>
-        //         <ResponsiveContainer width="100%" height="100%">
-        //             <BarChart
-        //                 width={500}
-        //                 height={300}
-        //                 data={data}
-        //                 margin={{
-        //                     top: 5,
-        //                     right: 30,
-        //                     left: 20,
-        //                     bottom: 5,
-        //                 }}
-        //             >
-        //                 <CartesianGrid strokeDasharray="3 3" />
-        //                 <XAxis dataKey="name" />
-        //                 <YAxis />
-        //                 <Tooltip />
-        //                 <Legend />
-        //                 <Bar dataKey="pv" fill="#8884d8" />
-        //                 <Bar dataKey="uv" fill="#82ca9d" />
-        //             </BarChart>
-        //         </ResponsiveContainer>
-
-        //         <ResponsiveContainer width="100%" height="100%">
-        //             <LineChart
-        //                 width={500}
-        //                 height={300}
-        //                 data={data}
-        //                 margin={{
-        //                     top: 5,
-        //                     right: 30,
-        //                     left: 20,
-        //                     bottom: 5,
-        //                 }}
-        //             >
-        //                 <CartesianGrid strokeDasharray="3 3" />
-        //                 <XAxis dataKey="name" />
-        //                 <YAxis />
-        //                 <Tooltip />
-        //                 <Legend />
-        //                 <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-        //                 <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        //             </LineChart>
-        //         </ResponsiveContainer>
-
-        //     </div>
-
-            // <div>
-            //     <h3><center><u>Profile Data</u></center></h3>
-            //     <p><h3>Name: {userData.name}</h3></p>
-            //     <p><h3>Email: {userData.email}</h3></p>
-            //     <p><h3>Phone: {userData.phone}</h3></p>
-            // </div>
-
-
-
-        // </main>
-
-
-        <>
-        <h1><center><u>YOUR PORTFOLIO</u></center></h1>
-        <p><h3>Invested Amount: ₹ {data[0].investment}/-</h3></p>
-        <p><h3>Current Value: ₹ {data[0].current}/-</h3></p>
-         <p><h3>Net Profit & Loss: ₹ {variable}/-</h3></p> 
-
-         {/* <button><Link to='/holding'>See your holding</Link></button> */}
-
-         <h1><center><u>YOUR CURRENT HOLDINGS</u></center></h1>
-         <table className="table table-striped">
+            <h1 className="profile-title"><center>YOUR CURRENT HOLDINGS</center></h1>
+            <table className="holding-table">
                 <thead>
                     <tr>
                         <th>Company Name</th>
-                        <th>Last Traded Price</th>
-                        <th>Yearly Change </th>
-                        <th>Monthly Change</th>
+                        <th>Buy Price</th>
+                        <th>Quantity</th>
+                        <th>Invested Amount</th>
                     </tr>
                 </thead>
-                 {/* <tbody>
-                    {holding.map((investor, i) => (
-                        investor.stocks.map((stock, j) => (
-                            <tr key={`${i}-${j}`}>
-                                <td>{stock.symbol}</td>
-                                <td>{stock.quantity}</td>
-                                <td>{stock.buyPrice}</td>
-                                <td>{stock.investedamt}</td>
-                            </tr>
-                        ))
+                <tbody>
+                    {holding.stocks && holding.stocks.map((stock, index) => (
+                        <tr key={index}>
+                            <td>{stock.symbol}</td>
+                            <td>{stock.buyPrice}</td>
+                            <td>{stock.quantity}</td>
+                            <td>{stock.quantity * stock.buyPrice}</td>
+                        </tr>
                     ))}
-                </tbody> */}
+                </tbody>
             </table>
-        
-        </>
-        
-    )
-}
 
-export default Profile
+        </div>
+    );
+};
+
+export default Profile;

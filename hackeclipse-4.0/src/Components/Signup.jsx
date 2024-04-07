@@ -10,7 +10,7 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,42 +36,38 @@ const Signup = () => {
     };
 
     return (
-        <div>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <div className="signup-container">
-                        <div className="signup-box">
-                            <h2><center>Register</center></h2>
-                            <div className="formdesign" id="name">
-                                Name: <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} /> <b><span className="formerror" /></b>
-                            </div>
-
-                            <div className="formdesign" id="email">
-                                Email: <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} /><b><span className="formerror" /></b>
-                            </div>
-
-                            <div className="formdesign" id="phone">
-                                Phone: <input type="tel" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} /><b><span className="formerror" /></b>
-                            </div>
-
-                            <div className="formdesign" id="pass">
-                                Password: <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} /><b><span className="formerror" /></b>
-                            </div>
-
-                            <div className="formdesign" id="cpass">
-                                Confirm Password: <input type="password" name="confirm_password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /><b><span className="formerror" /></b>
-                            </div>
-
-                            <div className="input-field button">
-                                <input type="submit" value="SignUp" className="submit-btn" />
-                            </div>
-
-                            {error && <div>Error: {error}</div>}
-                        </div>
+        <>
+            <body className="register-body">
+                <div className="register-container">
+                    <div className="register-background">
+                        <div className="register-shape"></div>
+                        <div className="register-shape"></div>
                     </div>
-                </form>
-            </div>
-        </div>
+                    <form className="register-form" onSubmit={handleSubmit}>
+                        <h3>Register Here</h3>
+
+                        <label htmlFor="name" className="register-label">Name</label>
+                        <input type="text" id="name" className="register-input" value={name} onChange={(e) => setName(e.target.value)} required />
+
+                        <label htmlFor="email" className="register-label">Email</label>
+                        <input type="email" id="email" className="register-input" value={email} onChange={(e) => setEmail(e.target.value)} required />
+
+                        <label htmlFor="phone" className="register-label">Phone</label>
+                        <input type="tel" id="phone" className="register-input" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+
+                        <label htmlFor="password" className="register-label">Password</label>
+                        <input type="password" id="password" className="register-input" value={password} onChange={(e) => setPassword(e.target.value)} required />
+
+                        <label htmlFor="confirm_password" className="register-label">Confirm Password</label>
+                        <input type="password" id="confirm_password" className="register-input" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+
+                        <button type="submit" className="register-button">Register</button>
+
+                    </form>
+                </div>
+            </body>
+
+        </>
     );
 }
 
