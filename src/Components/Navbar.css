@@ -1,3 +1,9 @@
 .nav-item{
     font-family:'Times New Roman', Times, serif
 }
+.bg-body-tertiary{
+    --bs-bg-opacity: 1;
+    background-color: #fff !important;
+    
+   
+}

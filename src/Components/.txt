@@ -1,2 +1,54 @@
 userData is the state variable that holds the current state value.
 setUserData is the function that you can call to update the userData state.
+
+import React from 'react'
+
+const BuyStockss = () => {
+
+
+    const stockData = [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "investment": 10000,
+            "stocks": [
+                {
+                    "symbol": "AAPL",
+                    "quantity": 10,
+                    "buyPrice": 150.25,
+                    "investedamt": "2024cr"
+
+                },
+    ]},
+    ]
+    return (
+
+        <div>
+            <h1><center>Choose your stocks</center></h1>
+            <h4><center>Our one lot is equal to 0.1 share</center></h4>
+            <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Symbol</th>
+                                            <th>Quantity</th>
+                                            <th>Buy Price</th>
+                                            <th>InvestedAmt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {stockData.map((row, i) => (
+                                            <tr key={i}>
+                                                <td>{row.symbol}</td>
+                                                <td>{row.quantity}</td>
+                                                <td>{row.buyPrice}</td>
+                                                <td>{row.investorInvestedAmt}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+
+        </div>
+    )
+}
+
+export default BuyStockss

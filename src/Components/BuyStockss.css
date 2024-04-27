@@ -1,23 +1,25 @@
-.profile-container {
+.container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-.profile-title {
+.title {
     text-align: center;
     font-size: 24px;
     margin-bottom: 20px;
 }
 
-.portfolio-details {
+.sub-title {
+    text-align: center;
+    font-size: 18px;
     margin-bottom: 20px;
-    
 }
 
-.investment, .current-value, .net-profit-loss {
-    font-size: 18px;
-    margin-bottom: 10px;
+.investor-info {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
 .holding-table {
@@ -43,8 +45,4 @@
 
 .holding-table tr:hover {
     background-color: #ddd;
-}
-
-.profile-title{
-    font-size: x-large;
 }
