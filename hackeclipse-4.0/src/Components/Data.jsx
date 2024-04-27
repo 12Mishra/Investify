@@ -1,10 +1,10 @@
 import React from 'react'
 import './rest.css'
-
+import {useNavigate} from "react-router-dom" 
 const Data = () => {
-
+     const navigate = useNavigate()
     const redirect = () => {
-        window.location.href = "/auth/register";
+        navigate("/auth/register");
     }
 
     return (
